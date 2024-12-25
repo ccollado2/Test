@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<head>
+
+</head>
 <body>
 
 <h2>Send e-mail with tablet questions</h2>
@@ -14,11 +17,34 @@ Comment:<br>
 <input type="submit" value="Enviar">
 <input type="reset" value="Reset">
  
+
+</form>
+<script>
+async function demo( ){
   fetch(https://e76e5c8287dd434aa5bf44f0d278995b.api.mockbin.io/)
   .then(res=>res.json())
 .then(json=>console.log(json))
 .alert(json);
-</form>
+}
+demo();
 
+</script>
 </body>
 </html>
+
+async function demo( ){
+  fetch(https://e76e5c8287dd434aa5bf44f0d278995b.api.mockbin.io/)
+  .then(res=>res.json())
+.then(json=>console.log(json))
+.alert(json);
+}
+demo();
+
+async function demo(subject){
+const URL='https://www.reddit.com/r/javascript/top/.json?limit=5';
+const Res= fetch(URL);
+const response= await Res;
+const json= await response.json();
+console.log(json);
+}
+demo('javascript');
