@@ -1,19 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="EN">
 <head>
-<title>Online HTML Editor</title>
+    <title>calling a REST service from html</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+    </style>
 </head>
 <body>
-<h1>Online HTML Editor</h1>
-<p>Vale</p>
-   <script>
-      fetch("https://reqres.in/api/users?page=2")
-      .then((response) => response.json())
-	  .then((data)=>{
-			data.data.forEach((line)=>
-				{console.log(line);})
-		} 
-		);
-   </script>
+<h1>Calling REST service from html...</h1>
+<p>Vale, bola</p>
+
+<script>
+    //retrieve list of users
+    fetch("https://reqres.in/api/users?page=2")
+        .then(res => res.json())
+        .then(out => {
+            let linebreak = document.createElement("br");
+            document.body.appendChild(linebreak);
+            let text = ' ' + JSON.stringify(out.data);
+            // noinspection SpellCheckingInspection
+            let tn = document.createTextNode('JSONxxxx string: ' + text);
+            document.body.appendChild(tn);
+            document.body.appendChild(linebreak);
+            out.data.forEach(person => {
+                linebreak = document.createElement("br");
+                document.body.appendChild(linebreak);
+                const tnx = document.createTextNode(person.email);
+                document.body.appendChild(tnx);
+            })
+            return out;
+        });
+
+</script>
+
+<script>
+    //create a user
+    const apiUrl = 'https://reqres.in/api/users';
+    const data = {
+        name: 'John Doe',
+        job: 'johndoe@example.com',
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+    fetch(apiUrl, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            let linebreak = document.createElement("br");
+            document.body.appendChild(linebreak);
+            let text = ' ' + JSON.stringify(data, null, 2);
+            // noinspection SpellCheckingInspection
+            let tn = document.createTextNode('JSON response string: ' + text);
+            document.body.appendChild(tn);
+        })
+        .catch(error => {
+            console.error
+            ('Error:', error);
+        });
+</script>
 </body>
 </html>
+
